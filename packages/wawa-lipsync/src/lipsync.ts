@@ -102,6 +102,14 @@ export class Lipsync {
     this.analyser.connect(this.audioContext.destination);
   }
 
+  connectAudioNode(audioNode: AudioNode) {
+    this.audioContext.resume();
+    this.history = [];
+    this.features = null;
+    this.state = FSMStates.silence;
+    audioNode.connect(this.analyser);
+  }
+
   // Connect live microphone
   async connectMicrophone() {
     try {
